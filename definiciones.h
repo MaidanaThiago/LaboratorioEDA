@@ -2,6 +2,8 @@
 #define DEFINICIONES_H
 #include <stdbool.h>
 #include <stddef.h> 
+#include "prototipos.h"
+typedef char *cadena;
 
 // 1.Tipo de Retorno (Requerido por el problema)
 typedef enum _retorno {
@@ -62,6 +64,10 @@ int cantVersionesNivel1;//Cantidad actual de versiones de nivel 1
 } _archivo;
 
 
-typedef _archivo* Archivo;
+typedef _archivo *Archivo;
+
+typedef enum _opciones{
+	Creararchivo, Crearversion, Mostrarversiones, Insertarlinea, salgo, Borrarlinea,Mostrarcambios,Borrararchivo,Borrarversion,Mostrartexto,iguales,Versionindependiente, error, limpio
+}opciones;
 	
 #endif

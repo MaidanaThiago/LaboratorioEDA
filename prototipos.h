@@ -23,4 +23,8 @@ TipoRet Iguales(Archivo a, char * version1, char * version2, bool &iguales);
 
 TipoRet VersionIndependiente(Archivo &a, char * version);
 
+
+Archivo insertoLinea(Archivo &a, char * version, char * linea,unsigned int nroLinea);
+
+void muestroRetorno(TipoRet retorno);
 #endif
