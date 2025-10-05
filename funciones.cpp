@@ -3,23 +3,36 @@
 #include "definiciones.h"
 using namespace std;
 
-Archivo CrearArchivo(char * nombre);
+// Libera una lista enlazada de modificaciones
+void liberarModificaciones(Modificacion *m) {
+	while (m != NULL) {
+		Modificacion *aux = m;
+		m = m->siguiente;
+		if (aux->tipo == MOD_INSERCION && aux->contenido.textoInsertado != NULL)
+			delete aux->contenido.textoInsertado;
+		delete aux;
+	}
+}
 
-TipoRet BorrarArchivo(Archivo &a);
-
-TipoRet CrearVersion(Archivo &a, char * version);
-TipoRet BorrarVersion(Archivo &a, char * version);
-
-TipoRet MostrarVersiones(Archivo a);
-
-TipoRet InsertarLinea(Archivo &a, char * version, char * linea,unsigned int nroLinea);
-
-TipoRet BorrarLinea(Archivo &a, char * version, unsigned int nroLinea);
-
-TipoRet MostrarTexto(Archivo a, char * version);
-
-TipoRet MostrarCambios(Archivo a, char * version);
-
-TipoRet Iguales(Archivo a, char * version1, char * version2, bool &iguales);
-
-TipoRet VersionIndependiente(Archivo &a, char * version);
+// Libera una versión y todas sus subversiones recursivamente
+void liberarVersion(Version *v) {
+	if (v == NULL) return;
+	
+	// Liberar subversiones recursivamente
+	for (int i = 0; i < v->cantSubversiones; i++) {
+		liberarVersion(v->subversiones[i]);
+	}
+	
+	// Liberar array de subversiones
+	if (v->subversiones != NULL)
+		free(v->subversiones);
+	
+	// Liberar lista de modificaciones
+	liberarModificaciones(v->modificaciones);
+	
+	// Liberar identificador y arreglo de números
+	if (v->identificador != NULL) delete v->identificador;
+	if (v->numerosVersion != NULL) delete v->numerosVersion;
+	
+	delete v;
+}

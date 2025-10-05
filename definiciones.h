@@ -62,6 +62,6 @@ int cantVersionesNivel1;//Cantidad actual de versiones de nivel 1
 } _archivo;
 
 
-typedef _archivo* Archivo;
+typedef _archivo* Archivo;
 	
 #endif

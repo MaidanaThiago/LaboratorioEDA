@@ -1,7 +1,7 @@
 #ifndef PROTOTIPOS_H
 #define PROTOTIPOS_H
 #include "definiciones.h"
-
+//Prototipos TipoRet
 Archivo CrearArchivo(char * nombre);
 
 TipoRet BorrarArchivo(Archivo &a);
@@ -23,4 +23,8 @@ TipoRet Iguales(Archivo a, char * version1, char * version2, bool &iguales);
 
 TipoRet VersionIndependiente(Archivo &a, char * version);
 
+//Prototipos de funciones
+void liberarModificaciones(Modificacion *m);
+
+void liberarVersion(Version *v);
 #endif
